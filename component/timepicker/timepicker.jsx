@@ -9,6 +9,7 @@ export default class Timepicker extends React.Component {
     this.hourEle = null;
     this.minuteEle = null;
     this.secondEle = null;
+    this.reg = /^((([0-1][0-9])|([2][0-3])):[0-5][0-9]:[0-5][0-9])$/g;
     this.state = {
       hourList: [],
       minuteList: [],
@@ -16,6 +17,8 @@ export default class Timepicker extends React.Component {
       value: "",
     };
     this.handleChange = this.handleChange.bind(this);
+    this.setInputTime = this.setInputTime.bind(this);
+    this.findNoDiable = this.findNoDiable.bind(this);
   }
   getHour(hour) {
     let time = 24, arr = [];
@@ -29,7 +32,10 @@ export default class Timepicker extends React.Component {
     this.setState({
       hourList: arr
     }, () => {
-      if (hour) this.animate("hour", +hour.value);
+      if (hour) {
+        this.animate("hour", +hour.value);
+        this.setInputTime("hour", hour.value);
+      }
     });
   }
   getMinute(minute) {
@@ -44,7 +50,10 @@ export default class Timepicker extends React.Component {
     this.setState({
       minuteList: arr
     }, () => {
-      if (minute) this.animate("minute", +minute.value);
+      if (minute) {
+        this.animate("minute", +minute.value);
+        this.setInputTime("minute", minute.value);
+      }
     });
   }
   getSecond(second) {
@@ -59,20 +68,21 @@ export default class Timepicker extends React.Component {
     this.setState({
       secondList: arr
     }, () => {
-      if (second) this.animate("second", +second.value);
+      if (second) {
+        this.animate("second", +second.value);
+        this.setInputTime("second", second.value);
+      }
     });
   }
   animate(type, value) {
     const requestAnimationFrame = window.requestAnimationFrame;
     let element = this[type + "Ele"];
     let scrollTop = element.scrollTop;
-    let targetTop = value * this.defaultH;
+    let targetTop = value * this.defaultH; // 目标距离
     if (scrollTop === targetTop) return;
-    let result = Math.abs(scrollTop - targetTop);
-    let speed = 10;
-    if(result < 10 && result > 5) speed = 10;
-    if(result <= 5 && result >= 2) speed = 2;
-    if(result < 2) speed = 1;
+    let result = Math.abs(scrollTop - targetTop); // 计算实时变化距离
+    let speed = Math.floor(result / 4.5); // 计算步进
+    if (speed <= 2) speed = 1;
     requestAnimationFrame(() => {
       if (scrollTop < targetTop) {
         element.scrollTop = scrollTop + speed;
@@ -85,13 +95,12 @@ export default class Timepicker extends React.Component {
   handleChange(e) {
     const { hourList, minuteList, secondList } = this.state;
     let value = e.target.value.trim();
-    let reg = /^((([0-1][0-9])|([2][0-3])):[0-5][0-9]:[0-5][0-9])$/g;
     if (value.length < 8) {
       this.setState({ value });
       return;
     }
     value = value.substr(0, 8);
-    if (reg.test(value)) {
+    if (this.reg.test(value)) {
       let hour = +value.substr(0, 2), minute = +value.substr(3, 2), second = +value.substr(6, 2);
       this.setState({ value });
       this.animate("hour", hour);
@@ -102,7 +111,46 @@ export default class Timepicker extends React.Component {
       this.getSecond(secondList[second]);
     } else {
       this.setState({ value: "" });
+      this.animate("hour", 0);
+      this.animate("minute", 0);
+      this.animate("second", 0);
+      this.getHour();
+      this.getMinute();
+      this.getSecond();
     }
+  }
+  setInputTime(type, time) {
+    let value = this.state.value;
+    if(this.reg.test(value)){
+      value = value.split(":");
+      let replaceIndex = type === "hour" ? 0 : type === "minute" ? 1 : 2;
+      value.splice(replaceIndex, 1, time);
+      value = value.join(":");
+      this.setState({ value });
+      return;
+    }
+    if(type === "hour"){
+      value = time + ":" + this.findNoDiable("minute");
+    }else if(type === "minute"){
+      value = this.findNoDiable("hour") + ":" + time;
+    }
+    if(this.props.renderSecond){ // 判断是否渲染秒
+      if(type === "second"){
+        value = this.findNoDiable("hour") + ":" + this.findNoDiable("minute") + ":" + time;
+      }else{
+        value += (":"+this.findNoDiable("second"));
+      }
+    }
+    this.setState({ value });
+  }
+  findNoDiable(type){
+    let value, defaultValue;
+    this.state[type+"List"].every(item => {
+      if(!defaultValue && !item.disabled) defaultValue = item.value;
+      if(!value && item.selected) value = item.value;
+      return value ? false : true;
+    });
+    return value ? value : defaultValue;
   }
   componentWillMount() {
     this.getHour();
