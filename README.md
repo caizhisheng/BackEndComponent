@@ -1,3 +1,3 @@
-# BackEndComponent
-React常用组件
-注意：组件使用为React版本16.x，css支持IE10，及以上
+# React组件库
+个人常用组件集合，持续更新与完善中...<br>
+注意：组件使用的React版本为16.x，css支持IE10及以上
