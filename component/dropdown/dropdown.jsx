@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styles from "./dropdown.scss";
 
 export default class Dropdown extends React.Component {
@@ -6,14 +6,14 @@ export default class Dropdown extends React.Component {
     super(props);
     this.state = {
       hide: true,
-    }
-    this.handleClick = this.handleClick.bind(this);
+    };
+    this.onClick = this.onClick.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
   }
-  handleClick(index, item) {
+  onClick(index, item) {
     const props = this.props;
-    if (props.handleClick) {
-      props.handleClick(index, item);
+    if (props.onClick) {
+      props.onClick(index, item);
     }
     setTimeout(() => {
       this.setState({ hide: true });
@@ -40,11 +40,11 @@ export default class Dropdown extends React.Component {
           style={{ height: hide ? 0 : data.length * 36 + "px" }}>
           {
             data.map((item, index) => {
-              return <li onClick={e => this.handleClick(index, item)} key={index}>{item.title}</li>
+              return <li onClick={() => this.onClick(index, item)} key={index}>{item.title}</li>;
             })
           }
         </ul>
       </div>
-    )
+    );
   }
 }

@@ -1,0 +1,73 @@
+$baseSize: 28;
+.select-box{
+  position: relative;
+  width: 100%;
+  height: $baseSize+px;
+  .select-show{ // 默认展示
+    position: relative;
+    display: flex;
+    width: 100%;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #ccc;
+    height: $baseSize+px;
+    line-height: 27px;
+    transition: all .3s;
+    &-title{ // 展示值
+      flex: 1;
+      overflow: hidden;
+      padding-left: 6px;
+      font-size: ($baseSize/2)-1+px;
+    }
+    &-icon{ // 箭头图标
+      width: $baseSize+px;
+      height: $baseSize+px;
+      text-align: center;
+      line-height: $baseSize+px;
+      display: block;
+      color: #999;
+      transition: all .3s;
+    }
+    &:hover{
+      cursor: pointer;
+      box-shadow: 0 0 5px #666;
+    }
+  }
+  .select-menu{ // 下拉菜单
+    width: 100%;
+    max-height: 220px;
+    overflow-y: auto;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #666;
+    box-sizing: border-box;
+    transition: all .3s;
+    transform: scale(1, 0);
+    transform-origin: top left 0;
+    position: relative;
+    z-index: 99;
+    background-color: #fff;
+    &-open{
+      transform: scale(1);
+    }
+    & > li{
+      line-height: $baseSize - 4 +px;
+      width: 100%;
+      padding: 3px 6px;
+      box-sizing: border-box;
+      background-color: #fff;
+      transition: all .3s;
+      font-size: ($baseSize/2)-1+px;
+      &:hover{
+        background-color: #e6f7ff;
+        cursor: pointer;
+      }
+      &.item-selected{
+        background-color: #e6f7ff;
+        color: #29e;
+      }
+    }
+  }
+}
