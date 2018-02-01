@@ -1,0 +1,80 @@
+@mixin flexDisplay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+$radius: 5;
+$baseDistance: 10;
+.modal-hide{
+}
+.modal-box-hide{
+}
+.modal-mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: .25);
+  transition: all .3s;
+  opacity: 1;
+}
+.modal-box{
+  width: 700px;
+  margin: 0 auto;
+  transition: all .3s;
+  transform: translateY(100px);
+  opacity: 1;
+  box-shadow: 0 0 10px #fff;
+  border-radius: 5px;
+  .modal-header{
+    height: 34px;
+    line-height: 34px;
+    position: relative;
+    padding-right: 34px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-top-left-radius: $radius+px;
+    border-top-right-radius: $radius+px;
+    overflow: hidden;
+    &-title{
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: $baseDistance+px;
+    }
+    &-close{
+      position: absolute;
+      top: 0;
+      right: 0;
+      @include flexDisplay;
+      width: 34px;
+      height: 34px;
+      background-color: #29e;
+      color: #fff;
+      transition: all .3s;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+  .modal-body{
+    padding: $baseDistance+px;
+    background-color: #fff;
+  }
+  .modal-footer{
+    height: 48px;
+    line-height: 48px;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    border-bottom-left-radius: $radius+px;
+    border-bottom-right-radius: $radius+px;
+    button{
+      margin-right: $baseDistance+px;
+    }
+  }
+}

@@ -24,6 +24,9 @@ export default class Select extends React.Component {
   componentDidMount(){
     this.setShow();
   }
+  componentWillReceiveProps(){
+    
+  }
   setShow(selectItem) { // 设置展示值
     const { data, defaultValue = "" } = this.props;
     let showText = "";
@@ -88,10 +91,14 @@ export default class Select extends React.Component {
                   {item.text}
                 </li>;
               })
-              : null
+              : <li onClick={this.toggle} className={styles["item-empty"]}>暂无数据</li>
           }
         </ul>
       </div>
     );
   }
 }
+
+Select.defaultProps = {
+  data: []
+};

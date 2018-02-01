@@ -24,7 +24,7 @@ $baseSize: 28;
       width: $baseSize+px;
       height: $baseSize+px;
       text-align: center;
-      line-height: $baseSize+px;
+      line-height: ($baseSize)-1+px;
       display: block;
       color: #999;
       transition: all .3s;
@@ -67,6 +67,11 @@ $baseSize: 28;
       &.item-selected{
         background-color: #e6f7ff;
         color: #29e;
+      }
+      &.item-empty{
+        color: #999;
+        background-color: #f9f9f9;
+        cursor: not-allowed;
       }
     }
   }

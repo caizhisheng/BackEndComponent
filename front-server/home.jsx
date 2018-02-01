@@ -13,6 +13,7 @@ import SmallPie from "../component/charts/smallPie/smallPie";
 import Search from "../component/search/search";
 
 import Select from "../component/select/select";
+import Modal from "../component/modal/modal";
 
 const selectData = [
   {text: "测试1", value: "1", other: "其他数据"},
@@ -28,8 +29,10 @@ const selectData = [
 ];
 
 render(
-  <div style={{width: "220px"}}>
-    <Select data={selectData} defaultValue="2" />
-  </div>,
+  <Modal title="弹窗测试">
+    <div style={{width: "150px"}}>
+      <Select data={selectData} defaultValue={"3"} />
+    </div>
+  </Modal>,
   document.getElementById("app"),
 )
