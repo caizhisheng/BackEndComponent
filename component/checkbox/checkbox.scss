@@ -1,12 +1,67 @@
+$size: 13;
 .checkbox-box{
+  position: relative; 
+  height: 22px;
   font-size: 14px;
-  input{
-    margin-right: 6px;
-    margin-top: 0;
-  }
-  &>label{
-    &:hover{
+  input, label{
+    &:hover{ 
       cursor: pointer;
     }
+  }
+  input[type='checkbox'] { 
+    position: absolute; 
+    left: $size - 10+px; 
+    top: 0; 
+    width: $size+px; 
+    height: $size+px; 
+    opacity: 0; 
+    z-index: 9;
+  }
+  label { 
+    position: absolute; 
+    left: 30px; 
+    top: 0; 
+    height: $size+px; 
+    line-height: ($size+5)+px; 
+    &::before { 
+      content: ''; 
+      position: absolute; 
+      left: -25px; 
+      top: 0; 
+      width: $size+px; 
+      height: $size+px; 
+      border: 2px solid #ddd; 
+      background: #fff;
+      border-radius: 50%; 
+      transition: all 0.3s ease; 
+      -webkit-transition: all 0.3s ease; 
+      -moz-transition: all 0.3s ease; 
+    }
+    &::after { 
+      content: ''; 
+      position: absolute; 
+      left: -20px;
+      top: 2px;
+      width: 4px;
+      height: 9px;
+      border: 0; 
+      border-right: 2px solid #fff; 
+      border-bottom: 2px solid #fff; 
+      background: #fff; 
+      transform: rotate(45deg); 
+      -webkit-transform: rotate(45deg); 
+      -moz-transform: rotate(45deg); 
+      -ms-transform: rotate(45deg); 
+      transition: all 0.3s ease; 
+      -webkit-transition: all 0.3s ease; 
+      -moz-transition: all 0.3s ease; 
+    }
+  }
+  input[type='checkbox']:checked + label:before { 
+    background: #3ea6f0; 
+    border-color: #3ea6f0; 
+  } 
+  input[type='checkbox']:checked + label:after { 
+    background: #3ea6f0; 
   }
 }

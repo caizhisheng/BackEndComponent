@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./select.scss";
+import cls from "./select.scss";
 
 export default class Select extends React.Component {
   constructor(props) {
@@ -75,23 +75,23 @@ export default class Select extends React.Component {
     const props = this.props;
     const { isOpen, showText } = this.state;
     return (
-      <div className={styles["select-box"]}>
-        <div className={styles["select-show"]} onClick={this.toggle}>
-          <span className={styles["select-show-title"]}>{showText}</span>
-          <span className={`fa fa-angle-down ${styles["select-show-icon"]}`}></span>
+      <div className={cls["select-box"]}>
+        <div className={cls["select-show"]} onClick={this.toggle}>
+          <span className={cls["select-show-title"]}>{showText}</span>
+          <span className={`fa fa-angle-down ${cls["select-show-icon"]}`}></span>
         </div>
-        <ul className={styles["select-menu"] + ` ${isOpen ? styles["select-menu-open"] : ""}`}>
+        <ul className={cls["select-menu"] + ` ${isOpen ? cls["select-menu-open"] : ""}`}>
           {
             props.data.length > 0 ?
               props.data.map((item, index) => {
                 return <li 
-                  className={item.selected ? styles["item-selected"] : ""} 
+                  className={item.selected ? cls["item-selected"] : ""} 
                   onClick={() => this.onClick(item)} 
                   key={index}>
                   {item.text}
                 </li>;
               })
-              : <li onClick={this.toggle} className={styles["item-empty"]}>暂无数据</li>
+              : <li onClick={this.toggle} className={cls["item-empty"]}>暂无数据</li>
           }
         </ul>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./treeMenu.scss";
+import cls from "./treeMenu.scss";
 
 export default class TreeMenu extends React.Component{
   constructor(props){
@@ -46,21 +46,21 @@ export default class TreeMenu extends React.Component{
           <li key={item.id}>
             <div style={style} 
               onClick={e => this.onClick(item, e)}
-              className={styles["menu-item-title"]+" "+(item.selected ? styles["menu-item-selected"] : "")}>
-              { item.icon && item.icon !== "" ? <i class={styles["fa"]+" "+styles[`fa-${item.icon}`]}></i> : null }
-              <span className={styles["item-title"]}>{item.name}</span>
-              <span class={styles["fa"]+" "+styles["fa-angle-right"]+" "+(item.isHide ? "" : styles["menu-show"])}></span>
+              className={cls["menu-item-title"]+" "+(item.selected ? cls["menu-item-selected"] : "")}>
+              { item.icon && item.icon !== "" ? <i class={cls["fa"]+" "+cls[`fa-${item.icon}`]}></i> : null }
+              <span className={cls["item-title"]}>{item.name}</span>
+              <span class={cls["fa"]+" "+cls["fa-angle-right"]+" "+(item.isHide ? "" : cls["menu-show"])}></span>
             </div>
-            <ul className={styles["menu-sub"]+" "+(item.isHide ? styles["menu-sub-hide"] : "" )}>{sonLi}</ul>
+            <ul className={cls["menu-sub"]+" "+(item.isHide ? cls["menu-sub-hide"] : "" )}>{sonLi}</ul>
           </li>
         );
       }else{
         result.push(
           <li style={style} 
             onClick={e => this.onClick(item, e)}
-            key={item.id} className={styles["menu-item"]+" "+(item.selected ? styles["menu-item-selected"] : "")}>
-            {item.icon && item.icon !== "" ? <i class={styles["fa"]+" "+styles[`fa-${item.icon}`]}></i> : null}
-            <span className={styles["item-title"]}>{item.name}</span>
+            key={item.id} className={cls["menu-item"]+" "+(item.selected ? cls["menu-item-selected"] : "")}>
+            {item.icon && item.icon !== "" ? <i class={cls["fa"]+" "+cls[`fa-${item.icon}`]}></i> : null}
+            <span className={cls["item-title"]}>{item.name}</span>
           </li>
         );
       }

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./header.scss";
+import cls from "./header.scss";
 
 export default class Header extends React.Component{
   constructor(props){
@@ -8,9 +8,9 @@ export default class Header extends React.Component{
   render(){
     const {headerMenu} = this.props;
     return(
-      <div className={styles["header-box"]}>
-        <div className={styles["header-logo"]}></div>
-        <ul className={styles["header-menu"]}>
+      <div className={cls["header-box"]}>
+        <div className={cls["header-logo"]}></div>
+        <ul className={cls["header-menu"]}>
           {
             headerMenu.map((item, index) => {
               return <li key={index}>{item.title}</li>;

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./dropdown.scss";
+import cls from "./dropdown.scss";
 
 export default class Dropdown extends React.Component {
   constructor(props) {
@@ -26,17 +26,17 @@ export default class Dropdown extends React.Component {
     const { icon, label, data } = this.props;
     const { hide } = this.state;
     return (
-      <div className={styles["dropdown-box"]}>
-        <div className={styles["dropdown-info"]}>
+      <div className={cls["dropdown-box"]}>
+        <div className={cls["dropdown-info"]}>
           {
             icon && icon !== "" ?
               <img src={icon} alt="" /> : null
           }
           <div onClick={this.toggleDropdown}>
-            <span>{label} <i className={styles["fa"] + " " + styles["fa-angle-down"]}></i></span>
+            <span>{label} <i className={cls["fa"] + " " + cls["fa-angle-down"]}></i></span>
           </div>
         </div>
-        <ul className={styles["dropdown-menu"] + " " + styles[`${hide ? "dropdown-hide" : ""}`]}
+        <ul className={cls["dropdown-menu"] + " " + cls[`${hide ? "dropdown-hide" : ""}`]}
           style={{ height: hide ? 0 : data.length * 36 + "px" }}>
           {
             data.map((item, index) => {

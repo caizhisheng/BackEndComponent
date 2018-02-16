@@ -31,6 +31,8 @@ const getFsExists = name => {
 };
 
 const createComponent = (name, type) => {
+  let js = fs.readFileSync("./template.js").toString()
+    .replace(/template/g, name);
   let jsx = fs.readFileSync("./template.jsx").toString()
     .replace(/template/g, name)
     .replace("Template", name.substring(0,1).toUpperCase()+name.substring(1));
@@ -38,6 +40,7 @@ const createComponent = (name, type) => {
   if(type === "dir"){
     fs.mkdirSync(__dirname+"/component/"+name);
   }
+  fs.writeFileSync(__dirname+"/component/"+name+"/"+name+".js", js );
   fs.writeFileSync(__dirname+"/component/"+name+"/"+name+".jsx", jsx );
   fs.writeFileSync(__dirname+"/component/"+name+"/"+name+".scss", scss );
   questionLoop();

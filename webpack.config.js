@@ -6,7 +6,7 @@ module.exports = {
   // 打开调试
   devtool: "eval-source-map",
   entry: {
-    bundle: ["./front-server/home.jsx", "./component/font-awesome/css/font-awesome.css"],
+    bundle: ["./front-server/home.jsx", "./component/icon-font/iconfont.css"/* , "./component/font-awesome/css/font-awesome.css" */],
     vender: ["react", "react-dom"]
   },
   output: {

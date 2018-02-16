@@ -6,9 +6,31 @@
   justify-content: center;
 }
 
+.login-bg{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 0;
+}
+
 .login-inner{
   width: 280px;
   background-color: rgba(204, 204, 204, 0.2);
+  form{
+    padding-top: 10px;
+  }
+}
+
+.login-option{
+  display: flex;
+  justify-content: space-between;
+  &>div{
+    flex: 1;
+  }
+  a{
+    color: #3ea6f0;
+    font-size: 14px;
+  }
 }
 
 .login-btn{

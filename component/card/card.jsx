@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./card.scss";
+import cls from "./card.scss";
 
 export default class Card extends React.Component{
   constructor(props){
@@ -7,7 +7,7 @@ export default class Card extends React.Component{
   }
   render(){
     return(
-      <div {...this.props} className={styles["card-box"]+" "+this.props.className}>
+      <div {...this.props} className={cls["card-box"]+" "+this.props.className}>
         {this.props.children}
       </div>
     );

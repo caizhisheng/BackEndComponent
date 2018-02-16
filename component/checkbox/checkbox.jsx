@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./checkbox.scss";
+import cls from "./checkbox.scss";
 
 export default class Checkbox extends React.Component{
   constructor(props){
@@ -8,14 +8,14 @@ export default class Checkbox extends React.Component{
   render(){
     const props = this.props;
     return(
-      <div className={styles["checkbox-box"]}>
-        <label>
-          <input 
-            {...props}
-            type="checkbox"
-          />{props.label}
-        </label>
+      <div className={cls["checkbox-box"]}>
+        <input id={props.id} type="checkbox" />
+        <label for={props.id}>{props.label}</label>
       </div>
     );
   }
 }
+
+Checkbox.defaultProps = {
+  id: "checkbox1"
+};

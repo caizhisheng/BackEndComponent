@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./search.scss";
+import cls from "./search.scss";
 
 import Input from "../input/input";
 
@@ -9,7 +9,7 @@ export default class Search extends React.Component{
   }
   render(){
     return(
-      <div {...this.props} className={styles["search-box"]}>
+      <div {...this.props} className={cls["search-box"]}>
         <Input prefix="search" {...this.props} />
       </div>
     );

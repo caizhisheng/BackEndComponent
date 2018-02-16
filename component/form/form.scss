@@ -1,7 +1,7 @@
 // 表单子项
 .form-item{
   display: flex;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   &-horizontal{
     align-items: center;
     &>label{
@@ -20,7 +20,7 @@
   &-content{
     flex: 1;
     position: relative;
-    &>div, &>ul, &>span{
+    &>span{
       display: block;
     }
     .form-item-tip{

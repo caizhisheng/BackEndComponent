@@ -1,31 +1,31 @@
 import React from "react";
-import styles from "./form.scss";
+import cls from "./form.scss";
 
 function Form(props) {
   return (
-    <form onSubmit="return false">
+    <form>
       {props.children}
     </form>
   );
 }
 Form.Item = function (props) {
   return (
-    <div className={styles["form-item"] + " "+ styles[`form-item-${props.direction}`]}>
+    <div className={cls["form-item"] + " "+ cls[`form-item-${props.direction}`]}>
       {
         props.label ?
-          <label className={styles["form-item-title"]}>
+          <label className={cls["form-item-title"]}>
             {
               props.isRequire != null ?
-                <span className={styles["item-title-require"]}>*</span>
+                <span className={cls["item-title-require"]}>*</span>
                 : null
             }
             {props.label}：
           </label>
           : null
       }
-      <div className={styles["form-item-content"]}>
+      <div className={cls["form-item-content"]}>
         {props.children}
-        <span className={styles["form-item-tip"]}></span>
+        <span className={cls["form-item-tip"]}></span>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./button.scss";
+import cls from "./button.scss";
 
 export default class Button extends React.Component {
   constructor(props) {
@@ -13,7 +13,12 @@ export default class Button extends React.Component {
     return (
       <button
         {...props}
-        className={styles["btn"] + " " + styles[`btn-${type}`] + " " + (props.className ? props.className : "")}>{this.props.children}</button>
+        type={props.htmlType}
+        className={cls["btn"] + " " + cls[`btn-${type}`] + " " + (props.className ? props.className : "")}>{this.props.children}</button>
     );
   }
 }
+
+Button.defaultProps = {
+  htmlType: "button"
+};

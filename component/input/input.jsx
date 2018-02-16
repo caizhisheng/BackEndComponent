@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./input.scss";
+import cls from "./input.scss";
 
 export default class Input extends React.Component{
   constructor(props){
@@ -50,10 +50,10 @@ export default class Input extends React.Component{
   render(){
     const props = this.props;
     return(
-      <span className={styles["input-box"]}>
+      <span className={cls["input-box"]}>
         {
           props.prefix ? 
-            <span className={`fa fa-${props.prefix} ${styles["input-prefix"]}`}></span>
+            <span className={`fa fa-${props.prefix} ${cls["input-prefix"]}`}></span>
             : null
         }
         <input 
@@ -65,14 +65,14 @@ export default class Input extends React.Component{
           onKeyUp={e => this.onKeyUp(e)}
           onKeyDown={e => this.onKeyDown(e)}
           onKeyPress={e => this.onKeyPress(e)}
-          className={styles["my-input"]+" "+
+          className={cls["my-input"]+" "+
             ((props.prefix || props.nextfix) ? "my-input-icon" : "")+" "+
-            (props.prefix ? styles["my-input-prefix"] : "")+" "+
-            (props.nextfix ? styles["my-input-nextfix"] : "")} 
+            (props.prefix ? cls["my-input-prefix"] : "")+" "+
+            (props.nextfix ? cls["my-input-nextfix"] : "")} 
         />
         {
           props.nextfix ?
-            <span className={`fa fa-${props.nextfix} ${styles["input-nextfix"]}`}></span>
+            <span className={`fa fa-${props.nextfix} ${cls["input-nextfix"]}`}></span>
             : null
         }
       </span>

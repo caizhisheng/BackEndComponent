@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../input/input";
-import styles from "./timepicker.scss";
+import cls from "./timepicker.scss";
 
 export default class Timepicker extends React.Component {
   constructor(props) {
@@ -163,28 +163,28 @@ export default class Timepicker extends React.Component {
     const { value, hourList, minuteList, secondList } = this.state;
     const { renderSecond } = this.props;
     return (
-      <div className={styles["timepicker-box"]}>
+      <div className={cls["timepicker-box"]}>
         <Input value={value} onInput={e => this.handleChange(e)} placeholder="请输入时间" nextfix="clock-o" />
-        <div className={styles["timepicker-box-select"]}>
-          <div ref={instance => this.hourEle = instance} className={styles["timepicker-box-hour"]}>
+        <div className={cls["timepicker-box-select"]}>
+          <div ref={instance => this.hourEle = instance} className={cls["timepicker-box-hour"]}>
             <ul>
               {
                 hourList.map((item, index) => {
                   return <li
                     onClick={() => this.getHour(item)}
-                    className={styles[item.selected ? "time-selected" : ""]}
+                    className={cls[item.selected ? "time-selected" : ""]}
                     key={index}>{item.value}</li>;
                 })
               }
             </ul>
           </div>
-          <div ref={instance => this.minuteEle = instance} className={styles["timepicker-box-minute"]}>
+          <div ref={instance => this.minuteEle = instance} className={cls["timepicker-box-minute"]}>
             <ul>
               {
                 minuteList.map((item, index) => {
                   return <li
                     onClick={() => this.getMinute(item)}
-                    className={styles[item.selected ? "time-selected" : ""]}
+                    className={cls[item.selected ? "time-selected" : ""]}
                     key={index}>{item.value}</li>;
                 })
               }
@@ -192,13 +192,13 @@ export default class Timepicker extends React.Component {
           </div>
           {
             renderSecond ?
-              <div ref={instance => this.secondEle = instance} className={styles["timepicker-box-second"]}>
+              <div ref={instance => this.secondEle = instance} className={cls["timepicker-box-second"]}>
                 <ul>
                   {
                     secondList.map((item, index) => {
                       return <li
                         onClick={() => this.getSecond(item)}
-                        className={styles[item.selected ? "time-selected" : ""]}
+                        className={cls[item.selected ? "time-selected" : ""]}
                         key={index}>{item.value}</li>;
                     })
                   }
