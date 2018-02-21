@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import cls from "./info.scss";
 
-let list = [];
+const transitionTime = 500;
 let container = null;
 
 function createContainer(){ // 创建容器
-  const div = document.createElement("div");
   const wrap = document.createElement("div");
+  const div = document.createElement("div");
   wrap.appendChild(div);
   document.body.appendChild(wrap);
   container = div;
@@ -16,17 +16,39 @@ function createContainer(){ // 创建容器
 class InfoContent extends React.Component{
   constructor(props){
     super(props);
+    this.startTimer = null;
+    this.closeTimer = null;
+    this.duration = props.duration;
     this.state = {
       styles: {}
     };
+    this.closeInfo = this.closeInfo.bind(this);
   }
   componentDidMount(){
     const { styles } = this.props;
-    setTimeout(() => {
+    clearTimeout(this.startTimer);
+    this.startTimer = setTimeout(() => {
       this.setState({
         styles
+      }, () => {
+        this.startTimer = null;
+        this.closeInfo();
       });
-    }, 500);
+    }, 100);
+  }
+  closeInfo(){
+    let styles = {
+      ...this.props.styles,
+      "top": 0,
+      "opacity": 0
+    };
+    clearTimeout(this.closeTimer);
+    this.closeTimer = setTimeout(() => {
+      this.setState({ styles }, () => {
+        this.closeTimer = null;
+        removeContent(this.props);
+      });
+    }, this.duration);
   }
   render(){
     const { label, icon, type } = this.props;
@@ -41,12 +63,31 @@ class InfoContent extends React.Component{
   }
 }
 
-InfoContent.getInstance = function(props, styles){
-  return <InfoContent {...props} styles={{top: "24px", "opacity": 1, ...styles}} />;
+InfoContent.defaultProps = {
+  "duration": 2000
 };
 
-function addContent(duration, callback){ // 添加提示
-  const content = InfoContent.getInstance(list.shift());
+InfoContent.getInstance = function(props){
+  let styles = {
+    "top": "24px", 
+    "opacity": 1,
+  };
+  if(props.styles){
+    styles = {
+      ...styles,
+      ...props.styles
+    };
+  }
+  return <InfoContent {...props} styles={styles} />;
+};
+
+function addContent(props){ // 添加提示
+  console.log(props);
+  if(typeof props.duration === "function"){
+    props.callback = props.duration;
+    delete props.duration;
+  }
+  const content = InfoContent.getInstance(props);
   if(!container){
     createContainer();
   }
@@ -56,16 +97,13 @@ function addContent(duration, callback){ // 添加提示
   );
 }
 
-/* function removeContent(args){ // 移除提示
-  let { instance, duration = 2000, callback } = args;
-  if(typeof duration === "function"){
-    callback = duration;
-    duration = 2000;
-  }
+function removeContent(props){ // 移除提示
+  const { callback = null } = props;
   setTimeout(() => {
-
-  }, duration+1000);
-} */
+    ReactDOM.unmountComponentAtNode(container);
+    if(callback) callback();
+  }, transitionTime);
+}
 
 createContainer();
 
@@ -76,19 +114,15 @@ createContainer();
  */
 
 export default function Info(label, duration, callback){
-  list.push({label, icon:"info", type:"default"});
-  addContent(duration, callback);
+  addContent({label, icon:"info", type:"default", duration, callback});
 }
 
 Info.success = function(label, duration, callback){
-  list.push({label, icon:"roundcheck", type:"success"});
-  addContent(duration, callback);
+  addContent({label, icon:"roundcheck", type:"success", duration, callback});
 };
 Info.fail = function(label, duration, callback){
-  list.push({label, icon:"roundclose", type:"fail"});
-  addContent(duration, callback);
+  addContent({label, icon:"roundclose", type:"fail", duration, callback});
 };
 Info.warning = function(label, duration, callback){
-  list.push({label, icon:"question", type:"warning"});
-  addContent(duration, callback);
+  addContent({label, icon:"question", type:"warning", duration, callback});
 };

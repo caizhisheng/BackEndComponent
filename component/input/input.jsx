@@ -53,7 +53,7 @@ export default class Input extends React.Component{
       <span className={cls["input-box"]}>
         {
           props.prefix ? 
-            <span className={`fa fa-${props.prefix} ${cls["input-prefix"]}`}></span>
+            <span className={`iconfont icon-${props.prefix} ${cls["input-prefix"]}`}></span>
             : null
         }
         <input 

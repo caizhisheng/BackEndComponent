@@ -15,9 +15,12 @@ export default class Login extends React.Component{
     this.instance = null;
     this.setSize = this.setSize.bind(this);
     this.loadAnimation = this.loadAnimation.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(){
+    Info.success("成功了", function(){ alert("回调函数出来"); });
   }
   componentDidMount(){
-    Info("成功了");
     window.onload = () => {
       this.setSize();
       this.loadAnimation();
@@ -144,7 +147,7 @@ export default class Login extends React.Component{
         <Card className={styles["login-inner"]}>
           <Form>
             <FormItem>
-              <Input prefix="user-o" placeholder="请输入登录名称" />
+              <Input prefix="my_light" placeholder="请输入登录名称" />
             </FormItem>
             <FormItem>
               <Input type="password" prefix="lock" placeholder="请输入密码" />
@@ -156,7 +159,7 @@ export default class Login extends React.Component{
               </div>
             </FormItem>
             <FormItem>
-              <Button className={styles["login-btn"]} type="primary">登录</Button>
+              <Button onClick={this.handleSubmit} className={styles["login-btn"]} type="primary">登录</Button>
             </FormItem>
           </Form>
         </Card>
