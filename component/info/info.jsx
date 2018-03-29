@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import cls from "./info.scss";
 
 const transitionTime = 500;
+let list = [];
 let container = null;
 
 function createContainer(){ // 创建容器
@@ -20,45 +21,25 @@ class InfoContent extends React.Component{
     this.closeTimer = null;
     this.duration = props.duration;
     this.state = {
-      styles: {}
+      styles: {},
+      list: []
     };
     this.closeInfo = this.closeInfo.bind(this);
   }
-  componentDidMount(){
-    const { styles } = this.props;
-    clearTimeout(this.startTimer);
-    this.startTimer = setTimeout(() => {
-      this.setState({
-        styles
-      }, () => {
-        this.startTimer = null;
-        this.closeInfo();
-      });
-    }, 100);
-  }
-  closeInfo(){
-    let styles = {
-      ...this.props.styles,
-      "top": 0,
-      "opacity": 0
-    };
-    clearTimeout(this.closeTimer);
-    this.closeTimer = setTimeout(() => {
-      this.setState({ styles }, () => {
-        this.closeTimer = null;
-        removeContent(this.props);
-      });
-    }, this.duration);
+  componentWillUnmount(){
+    list.unshift();
   }
   render(){
-    const { label, icon, type } = this.props;
+    const { label, icon, type, className = null, data } = this.props;
     return(
-      <div className={cls["info-wrap"]}>
-        <div style={this.state.styles} className={cls["info-box"]+" "+cls[`info-box-${type}`]}>
-          <i className={`iconfont icon-${icon}`}></i>
-          <div>{label}</div>
-        </div>
-      </div>
+      data.map(() => {
+        return <div className={`${cls["info-wrap"]} ${className || ""}`}>
+          <div style={this.state.styles} className={cls["info-box"]+" "+cls[`info-box-${type}`]}>
+            <i className={`iconfont icon-${icon}`}></i>
+            <div>{label}</div>
+          </div>
+        </div>;
+      })
     );
   }
 }
@@ -72,17 +53,14 @@ InfoContent.getInstance = function(props){
     "top": "24px", 
     "opacity": 1,
   };
-  if(props.styles){
-    styles = {
-      ...styles,
-      ...props.styles
-    };
+  if(props.style){
+    styles = { ...styles, ...props.style };
   }
-  return <InfoContent {...props} styles={styles} />;
+  list.push({props, styles});
+  return <InfoContent data={list} {...props} styles={styles} />;
 };
 
 function addContent(props){ // 添加提示
-  console.log(props);
   if(typeof props.duration === "function"){
     props.callback = props.duration;
     delete props.duration;
@@ -97,13 +75,13 @@ function addContent(props){ // 添加提示
   );
 }
 
-function removeContent(props){ // 移除提示
+/* function removeContent(props){ // 移除提示
   const { callback = null } = props;
   setTimeout(() => {
     ReactDOM.unmountComponentAtNode(container);
     if(callback) callback();
   }, transitionTime);
-}
+} */
 
 createContainer();
 
@@ -125,4 +103,8 @@ Info.fail = function(label, duration, callback){
 };
 Info.warning = function(label, duration, callback){
   addContent({label, icon:"question", type:"warning", duration, callback});
+};
+Info.destory = function(callback){
+  // removeContent();
+  if(callback) callback();
 };

@@ -18,7 +18,7 @@ export default class Login extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(){
-    Info.success("成功了", function(){ alert("回调函数出来"); });
+    Info.success("成功了");
   }
   componentDidMount(){
     window.onload = () => {

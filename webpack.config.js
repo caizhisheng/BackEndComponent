@@ -1,12 +1,12 @@
 const path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   // 打开调试
   devtool: "eval-source-map",
   entry: {
-    bundle: ["./front-server/home.jsx", "./component/icon-font/iconfont.css"/* , "./component/font-awesome/css/font-awesome.css" */],
+    bundle: ["./front-server/home.jsx", "./component/icon-font/iconfont.css"],
     vender: ["react", "react-dom"]
   },
   output: {

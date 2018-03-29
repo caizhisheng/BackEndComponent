@@ -1,5 +1,5 @@
 import React from "react";
-import "./table.scss";
+import cls from "./table.scss";
 
 export default class Table extends React.Component{
   constructor(props){
@@ -7,7 +7,7 @@ export default class Table extends React.Component{
   }
   render(){
     return(
-      <div className="table-box">
+      <div className={cls["table-box"]}>
         
       </div>
     );

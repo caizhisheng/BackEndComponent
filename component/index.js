@@ -9,6 +9,7 @@ import Input from "./input";
 import Modal from "./modal";
 import Search from "./search";
 import Select from "./select";
+import Tabel from "./table";
 import Timepicker from "./timepicker";
 import TreeMenu from "./treeMenu";
 
@@ -24,6 +25,7 @@ export {
   Modal,
   Search,
   Select,
+  Tabel,
   Timepicker,
   TreeMenu
 };
