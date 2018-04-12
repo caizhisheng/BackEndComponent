@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./login.scss";
 
-import { Card, Form, Input, Button, Checkbox, Info } from "../../../component";
+import { Card, Form, Input, Button, Checkbox, Info } from "component";
 
 const FormItem = Form.Item;
 

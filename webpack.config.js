@@ -15,7 +15,10 @@ module.exports = {
     publicPath: "/",
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    alias: {
+      component: path.resolve(__dirname, "./component")
+    }
   },
   module: {
     rules: [{
